@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Hesapla</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            width: 100%;
+            padding: 0 24px;
+            display: grid;
+            place-items: center;
+            background-color: #4E6E81;
+            text-align: center;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #F9DBBB;
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 20px;
+            border: 1px solid #FF0303;
+            color: #2E3840;
+        }
+
+        h1 {
+            color: #2E3840;
+            background-color: #F9DBBB;
+            border-radius: 20px;
+            padding: 10px 0;
+            border: 1px solid #FF0303;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        button {
+            padding: 20px 30px;
+            border-radius: 20px;
+            border: 1px solid #2E3840;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #4E6E81;
+            color: #fff;
+            font-family: 'Varela Round', sans-serif;
+            cursor: pointer;
+        }
+
+        input {
+            width: 80px;
+            padding: 10px 0 10px 20px;
+            font-family: 'Varela Round', sans-serif;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            font-size: 20px;
+            text-align: left;
+        }
+
+        button:hover {
+            background-color: #2E3840;
+            color: #F9DBBB;
+            box-shadow: 5px 5px 10px #4b677e;
+            transform: scale(1.3);
+        }
+
+        #sayiGetir {
+            padding: 10px 20px;
+            font-size: 18px;
+
+        }
+
+        #sayiAlan {
+            width: 200px;
+            height: 150px;
+            line-height: 150px;
+            font-size: 40px;
+            font-family: 'Varela Round', sans-serif;
+            background-color: #ee6c6c;
+            margin: 20px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        #innerDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        p {
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .alan {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Varela Round', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>Not Hesapla</h1>
+        <div class="container">
+            <div class="alan">
+                <input type="number" id="vize" name="vize" min="0" max="100">
+                <label for="vize">Vize notunuzu giriniz</label>
+            </div>
+            <div class="alan">
+
+                <input type="number" id="final" name="final" min="0" max="100">
+                <label for="final">Final notunuzu giriniz</label>
+            </div>
+            <div class="alan">
+
+                <input type="number" id="proje" name="proje" min="0" max="100">
+                <label for="proje">Proje notunuzu giriniz</label>
+            </div>
+            <div id="innerDiv">
+                <div id="sayiAlan"></div>
+                <button id="sayiGetir" onclick="Hesapla()">Hesapla</button>
+                <p>Girilen notlara göre yıl sonu notunu getir.</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function Hesapla() {
+            const vizeYuzde = 0.3;
+            const finalYuzde = 0.5;
+            const projeYuzde = 0.2;
+            let vize = document.getElementById('vize').value;
+            let final = document.getElementById('final').value;
+            let proje = document.getElementById('proje').value;
+            let yaz = document.getElementById('sayiAlan');
+            let not;
+            if (vize == '' || final == '' || proje == '') {
+                alert('Lütfen tüm notları giriniz!')
+            }
+            else if ((vize > 100 || vize < 0) || (final > 100 || final < 0) || (proje > 100 || proje < 0)) {
+                alert('Lütfen 0-100 arası bir değer giriniz!');
+            }
+            else {
+                not = vize * vizeYuzde + final * finalYuzde + proje * projeYuzde;
+                if (not <= 40) {
+                    yaz.innerHTML = 'FF' + '(' + not + ')';
+                    yaz.style.backgroundColor = 'red';
+                }
+                else if (not <= 50) {
+                    yaz.style.backgroundColor = 'orange';
+                    yaz.innerHTML = 'DD' + '(' + not + ')';
+                }
+                else if (not <= 70) {
+                    yaz.style.backgroundColor = 'yellow';
+                    yaz.innerHTML = 'CC' + '(' + not + ')';
+                }
+                else if (not <= 85) {
+                    yaz.style.backgroundColor = 'green';
+                    yaz.innerHTML = 'BB' + '(' + not + ')';
+                }
+                else if (not > 85) {
+                    yaz.style.backgroundColor = 'blue';
+                    yaz.innerHTML = 'AA' + '(' + not + ')';
+                }
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
