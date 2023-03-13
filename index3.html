@@ -148,22 +148,30 @@
         </div>
     </div>
     <script>
+
         function Hesapla() {
+          
             const vizeYuzde = 0.3;
             const finalYuzde = 0.5;
             const projeYuzde = 0.2;
+
             let vize = document.getElementById('vize').value;
             let final = document.getElementById('final').value;
             let proje = document.getElementById('proje').value;
+
             let yaz = document.getElementById('sayiAlan');
-            let not;
+
+            let not = 0;
+            yaz.innerHTML='';
+        
             if (vize == '' || final == '' || proje == '') {
-                alert('Lütfen tüm notları giriniz!')
+                alert('Lütfen tüm notları giriniz!');
             }
             else if ((vize > 100 || vize < 0) || (final > 100 || final < 0) || (proje > 100 || proje < 0)) {
                 alert('Lütfen 0-100 arası bir değer giriniz!');
             }
             else {
+               
                 not = vize * vizeYuzde + final * finalYuzde + proje * projeYuzde;
                 if (not <= 40) {
                     yaz.innerHTML = 'FF' + '(' + not + ')';
@@ -185,10 +193,16 @@
                     yaz.style.backgroundColor = 'blue';
                     yaz.innerHTML = 'AA' + '(' + not + ')';
                 }
+                Clean();
             }
-
+           
         }
-
+        function Clean() {
+            document.getElementById('vize').value = '';
+            document.getElementById('final').value = '';
+            document.getElementById('proje').value = '';
+            
+        }
     </script>
 
 </body>
